@@ -1,139 +1,225 @@
 # StudyFlow — Organizador de Estudos
 
-O **StudyFlow** é uma aplicação web desenvolvida com React que simula um organizador de estudos. A interface permite visualizar atividades escolares, pesquisar por atividade ou matéria, filtrar tarefas por status e favoritar atividades importantes. Também é possível consultar os detalhes de cada tarefa e marcar atividades como concluídas.
+O **StudyFlow** é uma aplicação web desenvolvida com React que simula um organizador de estudos. O projeto permite visualizar atividades acadêmicas, pesquisar tarefas, filtrar atividades por status, favoritar tarefas e consultar os detalhes de cada atividade.
 
-O projeto tem como objetivo praticar os principais conceitos do React por meio de uma aplicação interativa, organizada e responsiva.
+A aplicação foi desenvolvida com o objetivo de colocar em prática os principais conceitos do React, incluindo JSX, componentes, props, DOM e Virtual DOM, listas e keys, renderização condicional e gerenciamento de estado com `useState`.
 
 ## Funcionalidades
 
-- **Visualização de atividades:** exibe título, matéria, categoria, prazo e prioridade.
-- **Busca:** permite pesquisar pelo título da atividade ou pelo nome da matéria.
-- **Filtros:** mostra todas as atividades, somente as pendentes, as concluídas ou as favoritas.
-- **Favoritos:** permite favoritar e desfavoritar atividades.
-- **Detalhes:** abre uma janela com a descrição, o prazo, a prioridade e o status da atividade selecionada.
-- **Conclusão de tarefas:** permite marcar uma atividade como concluída ou voltar a deixá-la pendente.
-- **Resumo de progresso:** apresenta a quantidade de atividades, tarefas pendentes, tarefas concluídas e a porcentagem de progresso.
-- **Renderização condicional:** exibe mensagens diferentes de acordo com os filtros, os resultados da pesquisa e o status das atividades.
-- **Interface responsiva:** adapta a disposição dos cards para diferentes tamanhos de tela.
+- **Visualização de atividades:** exibe uma lista de atividades com título, matéria, descrição e status.
+- **Busca de atividades:** permite pesquisar atividades pelo título ou pela matéria.
+- **Filtro de atividades:** permite visualizar tarefas conforme seu status, como pendentes ou concluídas.
+- **Lista de favoritos:** permite adicionar e remover atividades dos favoritos.
+- **Detalhes das atividades:** apresenta informações adicionais sobre a atividade selecionada.
+- **Conclusão de tarefas:** permite marcar atividades como concluídas ou reabri-las.
+- **Indicador de progresso:** apresenta informações sobre o andamento das atividades.
+- **Renderização condicional:** exibe mensagens e elementos conforme o estado das atividades e os resultados da pesquisa.
+- **Interface responsiva:** adapta o layout para diferentes tamanhos de tela.
 
 ## Tecnologias utilizadas
 
 - **React:** biblioteca JavaScript utilizada para construir a interface.
-- **JavaScript:** linguagem usada na lógica e nas interações.
+- **JavaScript:** linguagem utilizada para implementar a lógica da aplicação.
 - **JSX:** sintaxe utilizada para descrever os elementos da interface dentro do JavaScript.
-- **HTML:** estrutura da página renderizada a partir do JSX.
-- **CSS:** estilização dos componentes e adaptação para dispositivos móveis.
-- **Vite:** ferramenta usada para executar o ambiente de desenvolvimento e gerar a versão de produção.
-- **Git e GitHub:** ferramentas que podem ser utilizadas para versionar e compartilhar o código-fonte.
+- **HTML:** estrutura dos elementos renderizados a partir do JSX.
+- **CSS:** responsável pela estilização dos componentes e pela adaptação para dispositivos móveis.
+- **Vite:** ferramenta utilizada para criar e executar o projeto durante o desenvolvimento.
+- **Git e GitHub:** ferramentas que podem ser utilizadas para versionamento e armazenamento do código-fonte.
 
 ## Conceitos de React aplicados
 
-### 1. JSX
+### 1. JSX: sintaxe e expressões JavaScript
 
-O JSX permite escrever uma estrutura semelhante ao HTML dentro do JavaScript. No StudyFlow, ele é utilizado para montar os cards, os filtros, o resumo de progresso e a janela de detalhes.
+O JSX permite escrever estruturas semelhantes ao HTML dentro do JavaScript, facilitando a criação e a organização da interface.
+
+No StudyFlow, o JSX é utilizado para construir os títulos, os cartões de atividades, os botões, os filtros e os demais elementos visuais.
+
+**Onde está contemplado:** no arquivo `src/App.jsx` e nos demais componentes React que utilizam a extensão `.jsx`.
 
 Exemplo:
 
 ```jsx
-<h1>Seus estudos, <span>no seu ritmo.</span></h1>
+<h2>{atividade.titulo}</h2>
+<p>{atividade.materia}</p>
 ```
 
-### 2. Componentes
+As expressões JavaScript entre chaves permitem exibir dinamicamente as informações de cada atividade.
 
-A interface foi dividida em componentes para facilitar a organização e a reutilização do código:
+### 2. Componentes: criação, composição e reutilização
 
-- `App`: componente principal, controla os estados e organiza a página.
-- `ListaAtividades`: exibe a lista de atividades ou uma mensagem quando não há resultados.
-- `AtividadeCard`: apresenta as informações de uma atividade e seus botões de ação.
+Os componentes permitem dividir a aplicação em partes menores, organizadas e reutilizáveis. Dessa forma, cada componente pode ter uma responsabilidade específica.
 
-### 3. Props
+No projeto, a interface é organizada em componentes como:
 
-As props transmitem informações e funções entre componentes. O `AtividadeCard`, por exemplo, recebe a atividade que deve mostrar, se ela está favoritada e as funções para favoritar, abrir detalhes ou alterar o status.
+- `App`: componente principal, responsável por organizar a aplicação e gerenciar suas funcionalidades.
+- `ListaAtividades`: responsável por exibir a coleção de atividades.
+- `AtividadeCard`: responsável por apresentar as informações e as ações de cada atividade.
 
-### 4. Virtual DOM
+**Onde está contemplado:** no arquivo `src/App.jsx` e nos arquivos em que os componentes `ListaAtividades` e `AtividadeCard` são definidos.
 
-O Virtual DOM é uma representação interna da interface utilizada pelo React para identificar mudanças e atualizar o DOM real. No projeto, é possível observar atualizações da interface ao favoritar atividades, pesquisar, aplicar filtros ou marcar tarefas como concluídas.
+A reutilização acontece quando o componente `AtividadeCard` é utilizado para apresentar diferentes atividades, evitando a repetição desnecessária de código.
 
-### 5. Listas e método `map()`
+### 3. Props: passagem de dados entre componentes
 
-O método `map()` percorre a lista de atividades e cria um componente `AtividadeCard` para cada item. A propriedade `key`, baseada no identificador de cada atividade, ajuda o React a acompanhar os elementos da lista.
+As props permitem transmitir informações e funções de um componente pai para um componente filho.
+
+No StudyFlow, os cartões recebem os dados das atividades e as funções necessárias para executar ações, como favoritar ou concluir uma tarefa.
+
+**Onde está contemplado:** na comunicação entre `ListaAtividades` e `AtividadeCard`, por meio das propriedades enviadas durante a utilização dos componentes.
+
+Exemplo:
+
+```jsx
+<AtividadeCard
+  atividade={atividade}
+  favorita={favoritos.includes(atividade.id)}
+  aoFavoritar={aoFavoritar}
+/>
+```
+
+Nesse exemplo:
+
+- `atividade` contém as informações da tarefa.
+- `favorita` indica se a atividade está nos favoritos.
+- `aoFavoritar` é uma função recebida pelo componente para executar a ação de favoritar.
+
+Assim, o componente filho recebe os dados necessários sem precisar concentrar toda a lógica da aplicação.
+
+### 4. DOM e Virtual DOM: renderização e reconciliação
+
+O DOM representa a estrutura dos elementos da página no navegador. O React utiliza o Virtual DOM como parte de seu mecanismo de atualização da interface.
+
+Quando o estado de um componente muda, o React identifica as alterações necessárias e atualiza o DOM real para refletir a nova interface.
+
+**Onde está contemplado:** no funcionamento dos componentes React, especialmente em `src/App.jsx`, `ListaAtividades` e `AtividadeCard`.
+
+Esse conceito pode ser observado ao pesquisar atividades, alterar filtros, adicionar favoritos ou marcar tarefas como concluídas. A interface é atualizada sem a necessidade de recarregar a página.
+
+O Virtual DOM e a reconciliação são mecanismos internos do React, portanto não precisam ser implementados manualmente no projeto.
+
+### 5. Listas e Keys: renderização de coleções de dados
+
+O React permite renderizar coleções de dados por meio de métodos JavaScript, como `map()`. A propriedade `key` fornece uma identificação estável para cada elemento da lista.
+
+No StudyFlow, o método `map()` é utilizado para percorrer as atividades e gerar um cartão para cada item.
+
+**Onde está contemplado:** no componente `ListaAtividades`, no trecho responsável por percorrer e renderizar as atividades.
+
+Exemplo:
 
 ```jsx
 {atividades.map((atividade) => (
-  <AtividadeCard key={atividade.id} atividade={atividade} />
+  <AtividadeCard
+    key={atividade.id}
+    atividade={atividade}
+  />
 ))}
 ```
 
-### 6. Renderização condicional
+Nesse exemplo, o método `map()` cria um componente para cada atividade, enquanto `key={atividade.id}` identifica cada item para ajudar o React a acompanhar as alterações da lista.
 
-A renderização condicional mostra conteúdos diferentes dependendo do estado da aplicação. Ela é usada para:
+### 6. Renderização condicional: controle de exibição da interface
 
-- Exibir uma mensagem quando a busca não encontra atividades.
-- Mostrar a janela de detalhes apenas quando uma atividade é selecionada.
-- Indicar se uma tarefa está pendente ou concluída.
-- Alterar o texto do botão entre “Concluir” e “Desmarcar”.
-- Destacar visualmente as atividades concluídas.
+A renderização condicional permite exibir ou ocultar elementos de acordo com condições definidas no código.
 
-### 7. Estado com `useState`
+No StudyFlow, esse conceito é utilizado para apresentar mensagens e elementos diferentes conforme as interações do usuário.
 
-O hook `useState` controla dados que mudam durante o uso da aplicação, como a lista de atividades, o texto da busca, o filtro atual, os favoritos e a atividade selecionada. Quando um estado é atualizado, o React atualiza a interface conforme necessário.
+**Onde está contemplado:** nos componentes que exibem o status das atividades, os resultados da pesquisa e os detalhes da tarefa selecionada.
+
+Exemplos de utilização:
+
+- Exibir uma indicação quando uma atividade está concluída.
+- Mostrar uma mensagem quando nenhuma atividade corresponde à pesquisa.
+- Abrir os detalhes somente quando uma atividade é selecionada.
+- Indicar visualmente as atividades adicionadas aos favoritos.
+
+Exemplo:
+
+```jsx
+{atividade.concluida && (
+  <p>Atividade concluída!</p>
+)}
+```
+
+Nesse caso, a mensagem é exibida somente quando a propriedade `concluida` da atividade é verdadeira.
+
+### 7. Estado com useState
+
+O hook `useState` permite armazenar e atualizar informações que podem mudar durante a execução da aplicação.
+
+No StudyFlow, o gerenciamento de estado é necessário para controlar as interações do usuário.
+
+**Onde está contemplado:** no componente `App` e nos componentes que utilizam estados próprios.
+
+Entre as informações controladas estão:
+
+- O texto digitado na pesquisa.
+- O filtro selecionado.
+- A lista de atividades favoritas.
+- A situação de conclusão das atividades.
+- A atividade selecionada para visualizar os detalhes.
+
+Quando esses estados são atualizados, o React renderiza novamente os componentes afetados, mantendo a interface sincronizada com os dados da aplicação.
 
 ## Como executar o projeto
 
 ### Pré-requisitos
 
-- [Node.js](https://nodejs.org/) instalado.
-- npm, instalado junto com o Node.js.
-- Um editor de código, como o Visual Studio Code.
+- Node.js instalado.
+- npm instalado.
+- Git instalado, caso deseje clonar o repositório.
 
 ### Instalação
 
-1. Extraia o arquivo do projeto e abra a pasta `studyflow` no Visual Studio Code.
-2. Abra o terminal integrado.
-3. Instale as dependências:
+1. Abra o terminal na pasta principal do projeto.
 
-   ```bash
-   npm install
-   ```
-
-4. Inicie o servidor de desenvolvimento:
-
-   ```bash
-   npm run dev
-   ```
-
-5. Acesse no navegador o endereço exibido no terminal, normalmente `http://localhost:5173`.
-
-Para verificar se o projeto pode ser compilado para produção, execute:
+2. Instale as dependências:
 
 ```bash
-npm run build
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+4. Acesse no navegador o endereço apresentado pelo terminal, normalmente:
+
+```text
+http://localhost:5173
 ```
 
 ## Estrutura do projeto
+
+A estrutura principal esperada para o projeto é:
 
 ```text
 studyflow/
 ├── public/
 ├── src/
-│   ├── assets/
 │   ├── App.jsx
 │   ├── App.css
 │   ├── index.css
 │   └── main.jsx
-├── .gitignore
 ├── index.html
 ├── package.json
 ├── package-lock.json
-├── eslint.config.js
-└── vite.config.js
+├── vite.config.js
+└── README.md
 ```
+
+Os componentes `ListaAtividades` e `AtividadeCard` podem estar definidos dentro de `App.jsx` ou em arquivos separados, dependendo de como o código foi organizado.
 
 ## Objetivo acadêmico
 
-O objetivo do StudyFlow é demonstrar como os conceitos fundamentais do React podem ser combinados na construção de uma aplicação web interativa. O projeto permite praticar componentização, passagem de props, gerenciamento de estado, renderização de listas, renderização condicional e criação de interfaces responsivas.
+O objetivo do StudyFlow é demonstrar, de maneira prática, como os principais conceitos do React podem ser utilizados em conjunto para desenvolver uma aplicação web interativa e responsiva.
+
+Por meio do projeto, é possível compreender a utilização do JSX, a criação e reutilização de componentes, a passagem de props, o gerenciamento de estados, a renderização de listas com keys e o controle de exibição de elementos por meio da renderização condicional.
 
 ## Observação
 
-As atividades iniciais estão definidas diretamente no código. O projeto não utiliza banco de dados nem armazenamento persistente; por isso, alterações feitas durante o uso, como favoritar atividades ou marcar tarefas como concluídas, são perdidas quando a página é recarregada. As datas de exemplo também podem ser alteradas no arquivo `src/App.jsx`.
-"# StudyFlow" 
+Os dados das atividades são definidos no código da aplicação. O projeto não utiliza banco de dados nem back-end.
+
+As alterações realizadas durante a utilização são controladas pelo estado do React e, sem um mecanismo adicional de persistência, podem ser perdidas quando a página é recarregada.
